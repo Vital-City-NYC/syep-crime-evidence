@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Summer Jobs &amp; Crime: The Evidence</title>
+<style>
+  :root {
+    --vc-black: #050507;
+    --vc-white: #ffffff;
+    --vc-cloud: #dddddd;
+    --vc-chartreuse: #dde44c;
+    --vc-orange: #ff7c53;
+    --vc-periwinkle: #9b9fbc;
+    --vc-rose: #cea9be;
+    --vc-magenta: #e7466d;
+    --vc-charcoal: #707175;
+    --vc-indigo: #394882;
+    --vc-cerulean: #217ebe;
+    --vc-chartreuse-80: #e4e871;
+    --vc-chartreuse-50: #edefa8;
+    --vc-chartreuse-20: #f7f8dd;
+    --vc-orange-80: #f69577;
+    --vc-orange-50: #fabcaa;
+    --vc-magenta-80: #ec6b8a;
+    --vc-cerulean-80: #4e98cb;
+    --font-primary: 'Helvetica Neue', Arial, sans-serif;
+    --font-serif: Georgia, 'Times New Roman', serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-primary);
+    background: var(--vc-white);
+    color: var(--vc-black);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--vc-black);
+    color: var(--vc-white);
+    padding: 48px 32px 56px;
+  }
+  .header-inner { max-width: 960px; margin: 0 auto; }
+  .header-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--vc-chartreuse);
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .header h1 {
+    font-weight: 900;
+    font-size: clamp(28px, 5vw, 44px);
+    line-height: 1.15;
+    max-width: 720px;
+    letter-spacing: -0.5px;
+  }
+  .header-dek {
+    font-family: var(--font-serif);
+    color: var(--vc-periwinkle);
+    font-size: 17px;
+    line-height: 1.6;
+    max-width: 640px;
+    margin-top: 16px;
+  }
+
+  /* SUMMARY STRIP */
+  .summary-strip {
+    background: var(--vc-black);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 0 32px 48px;
+  }
+  .summary-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .summary-stat {
+    text-align: center;
+    padding: 24px 12px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .summary-stat-value {
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--vc-chartreuse);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .summary-stat-label {
+    font-size: 11px;
+    color: var(--vc-periwinkle);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  /* CONTROLS */
+  .controls {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 32px 32px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+  }
+  .controls-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--vc-charcoal);
+    margin-right: 4px;
+  }
+  .filter-group {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .filter-btn {
+    font-family: var(--font-primary);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border: 1.5px solid var(--vc-cloud);
+    background: var(--vc-white);
+    color: var(--vc-charcoal);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .filter-btn:hover {
+    border-color: var(--vc-charcoal);
+    color: var(--vc-black);
+  }
+  .filter-btn.active {
+    background: var(--vc-black);
+    color: var(--vc-white);
+    border-color: var(--vc-black);
+  }
+  .sort-select {
+    font-family: var(--font-primary);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 28px 6px 12px;
+    border: 1.5px solid var(--vc-cloud);
+    background: var(--vc-white);
+    color: var(--vc-charcoal);
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23707175' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+  }
+  .controls-spacer { flex: 1; }
+  .result-count {
+    font-size: 12px;
+    color: var(--vc-charcoal);
+    font-weight: 600;
+  }
+
+  /* TABLE */
+  .table-wrap {
+    max-width: 960px;
+    margin: 20px auto 0;
+    padding: 0 32px 60px;
+    overflow-x: auto;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  thead th {
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--vc-charcoal);
+    padding: 12px 12px 10px;
+    border-bottom: 2px solid var(--vc-black);
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+  }
+  thead th:hover { color: var(--vc-black); }
+  thead th .sort-arrow {
+    font-size: 9px;
+    margin-left: 4px;
+    opacity: 0.3;
+  }
+  thead th.sorted .sort-arrow { opacity: 1; color: var(--vc-orange); }
+  tbody tr {
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    transition: background 0.1s;
+  }
+  tbody tr:hover { background: #fafafa; }
+  tbody tr.expanded { background: #fafaf5; }
+  tbody td {
+    padding: 14px 12px;
+    vertical-align: top;
+  }
+
+  .study-location {
+    font-weight: 700;
+    color: var(--vc-black);
+  }
+  .study-authors {
+    font-size: 11px;
+    color: var(--vc-charcoal);
+    margin-top: 2px;
+  }
+
+  /* Tags */
+  .tag {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 2px;
+  }
+  .tag-rct { background: rgba(231,70,109,0.12); color: var(--vc-magenta); }
+  .tag-quasi { background: rgba(33,126,190,0.12); color: var(--vc-cerulean); }
+  .tag-natural { background: rgba(155,159,188,0.15); color: var(--vc-indigo); }
+  .tag-nonexp { background: rgba(112,113,117,0.15); color: var(--vc-charcoal); }
+  .tag-meta { background: rgba(221,228,76,0.2); color: #7a7e00; }
+
+  .tag-city {
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--vc-charcoal);
+    background: #f3f3f3;
+    padding: 2px 7px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Effect bar */
+  .effect-cell { min-width: 200px; }
+  .effect-bar-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .effect-bar-track {
+    flex: 1;
+    height: 20px;
+    background: #f3f3f3;
+    position: relative;
+    overflow: hidden;
+  }
+  .effect-bar-fill {
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: width 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .effect-bar-label {
+    font-size: 13px;
+    font-weight: 900;
+    min-width: 64px;
+    text-align: right;
+  }
+
+  /* Expanded detail row */
+  .detail-row td {
+    padding: 0;
+    border-bottom: 1px solid #e8e8e4;
+  }
+  .detail-content {
+    padding: 20px 24px 24px;
+    background: #fafaf5;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 40px;
+  }
+  .detail-block h4 {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--vc-charcoal);
+    margin-bottom: 6px;
+  }
+  .detail-block p {
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--vc-black);
+  }
+  .detail-link {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--vc-orange);
+    text-decoration: none;
+    letter-spacing: 0.3px;
+  }
+  .detail-link:hover { text-decoration: underline; }
+  .detail-link::after { content: ' \2192'; }
+  .detail-full { grid-column: 1 / -1; }
+
+  .detail-insight {
+    grid-column: 1 / -1;
+    background: var(--vc-black);
+    color: var(--vc-white);
+    padding: 16px 20px;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+  .detail-insight strong { color: var(--vc-chartreuse); }
+
+  /* FOOTER */
+  .footer {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 32px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .footer-source {
+    font-size: 11px;
+    color: var(--vc-charcoal);
+    line-height: 1.6;
+    max-width: 640px;
+  }
+  .footer-source a { color: var(--vc-charcoal); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .summary-inner { grid-template-columns: repeat(2, 1fr); }
+    .detail-content { grid-template-columns: 1fr; }
+    .controls { padding: 24px 20px 0; }
+    .table-wrap { padding: 16px 20px 48px; }
+    .header { padding: 36px 20px 40px; }
+    .summary-strip { padding: 0 20px 36px; }
+    .footer { padding: 0 20px 36px; }
+  }
+  @media (max-width: 520px) {
+    .summary-inner { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .summary-stat-value { font-size: 28px; }
+    table { font-size: 12px; }
+    .effect-cell { min-width: 160px; }
+    .controls { gap: 8px; }
+  }
+
+  .no-results {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--vc-charcoal);
+    font-size: 14px;
+  }
+
+  .effect-bar-fill { width: 0; }
+  .effect-bar-fill.animate { width: var(--bar-w); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-label">Research &amp; Evidence</div>
+    <h1>Summer jobs and crime: the evidence</h1>
+    <div class="header-dek">A searchable reference of the research linking summer youth employment programs to reductions in crime &mdash; spanning 13 randomized evaluations across four major U.S. cities, with consistent declines in arrests, arraignments, convictions, incarceration, and even mortality among participants.</div>
+  </div>
+</div>
+
+<div class="summary-strip">
+  <div class="summary-inner">
+    <div class="summary-stat">
+      <div class="summary-stat-value">14</div>
+      <div class="summary-stat-label">Studies profiled</div>
+    </div>
+    <div class="summary-stat">
+      <div class="summary-stat-value">4</div>
+      <div class="summary-stat-label">U.S. cities</div>
+    </div>
+    <div class="summary-stat">
+      <div class="summary-stat-value">17&ndash;107%</div>
+      <div class="summary-stat-label">Range of arrest/CJ reductions</div>
+    </div>
+    <div class="summary-stat">
+      <div class="summary-stat-value">83</div>
+      <div class="summary-stat-label">NYC lives saved (mortality)</div>
+    </div>
+  </div>
+</div>
+
+<div class="controls" id="controls">
+  <div class="filter-group">
+    <span class="controls-label">City</span>
+    <button class="filter-btn active" data-filter="city" data-value="all">All</button>
+    <button class="filter-btn" data-filter="city" data-value="NYC">NYC</button>
+    <button class="filter-btn" data-filter="city" data-value="Chicago">Chicago</button>
+    <button class="filter-btn" data-filter="city" data-value="Boston">Boston</button>
+    <button class="filter-btn" data-filter="city" data-value="Philadelphia">Philadelphia</button>
+    <button class="filter-btn" data-filter="city" data-value="Multi">Multi-city</button>
+  </div>
+  <div class="filter-group">
+    <span class="controls-label">Design</span>
+    <button class="filter-btn active" data-filter="design" data-value="all">All</button>
+    <button class="filter-btn" data-filter="design" data-value="RCT">RCT</button>
+    <button class="filter-btn" data-filter="design" data-value="Quasi-experimental">Quasi-exp.</button>
+    <button class="filter-btn" data-filter="design" data-value="Non-experimental">Non-exp.</button>
+  </div>
+  <div class="controls-spacer"></div>
+  <select class="sort-select" id="sortSelect">
+    <option value="year-desc">Newest first</option>
+    <option value="year-asc">Oldest first</option>
+    <option value="effect-desc">Largest effect</option>
+    <option value="effect-asc">Smallest effect</option>
+  </select>
+  <div class="result-count" id="resultCount"></div>
+</div>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th data-sort="location">Study <span class="sort-arrow">&#9650;</span></th>
+        <th data-sort="year" class="sorted">Year <span class="sort-arrow">&#9660;</span></th>
+        <th data-sort="design">Design <span class="sort-arrow">&#9650;</span></th>
+        <th>City</th>
+        <th data-sort="effect" class="effect-cell">Headline crime/CJ effect <span class="sort-arrow">&#9650;</span></th>
+      </tr>
+    </thead>
+    <tbody id="studyBody"></tbody>
+  </table>
+  <div class="no-results" id="noResults" style="display:none;">No studies match the current filters.</div>
+</div>
+
+<div class="footer">
+  <div class="footer-source">
+    Primary source: <a href="https://www.povertyactionlab.org/sites/default/files/research-paper/SYEP_Evidence_Review-9.22.22.pdf" target="_blank">J-PAL North America, &ldquo;The Promises of Summer Youth Employment Programs: Lessons from Randomized Evaluations,&rdquo; September 2022</a> (Li &amp; Jackson-Spieker, with academic contributors Modestino, Kessler &amp; Heller).
+    This table profiles individual peer-reviewed evaluations underlying the J-PAL review, plus selected supplementary studies. Effect sizes are reported as percentage reductions on the headline criminal-justice outcome from each paper; some studies report multiple outcomes &mdash; see the expanded row for detail. Compiled April 2026.
+  </div>
+</div>
+
+<script>
+const STUDIES = [
+  {
+    id: 'heller-2014',
+    location: 'Chicago, IL (One Summer Plus, 2012)',
+    authors: 'Heller',
+    year: 2014,
+    design: 'RCT',
+    city: 'Chicago',
+    cityLabel: 'Chicago',
+    effect: 43,
+    effectLabel: '−43%',
+    journal: 'Science',
+    url: 'https://www.science.org/doi/10.1126/science.1257809',
+    methodology: 'Randomized 1,634 disadvantaged Chicago high-school youth (mostly Black, from violent neighborhoods) into a summer jobs program (One Summer Plus / OSC+) or a control group. Treatment youth received a 25-hour-per-week summer job, paid at minimum wage, with adult job mentors. A subset received a job split with social-emotional learning (10 hours SEL + 15 hours work).',
+    findings: 'Violent-crime arrests fell by 43 percent over the 16 months following random assignment — a reduction of 3.95 violent-crime arrests per 100 youth. The decline emerged largely after the program ended and persisted through the follow-up window. No significant differences were found across crime categories beyond violence.',
+    insight: 'The <strong>foundational randomized trial</strong> for SYEPs and crime. A short, low-cost, eight-week summer job produced a large, durable drop in violent-crime arrests — effects that persisted long after the paychecks stopped, suggesting the program changes how young people respond to conflict, not just how they spend July.'
+  },
+  {
+    id: 'gelber-isen-kessler-2016',
+    location: 'New York City SYEP (2005–2008)',
+    authors: 'Gelber, Isen & Kessler',
+    year: 2016,
+    design: 'RCT',
+    city: 'NYC',
+    cityLabel: 'NYC',
+    effect: 18,
+    effectLabel: '−18% mortality',
+    journal: 'Quarterly Journal of Economics',
+    url: 'https://academic.oup.com/qje/article/131/1/423/2461175',
+    methodology: 'Exploited NYC SYEP’s lottery for over-subscribed slots across the 2005–2008 cohorts (~294,000 applications). Linked applicant records to NY State unemployment insurance earnings, vital records, and Department of Corrections incarceration data to track outcomes for up to nine years.',
+    findings: 'SYEP participation cut the probability of incarceration by 10 percent (0.10 percentage points off a 0.99 percent baseline) and reduced mortality by 18 percent — driven entirely by drops in deaths from external causes (homicide, accident, suicide). Researchers estimate the program saved 83 lives among the 2005–2008 cohorts, mostly young men.',
+    insight: 'The most striking finding in the SYEP literature: a summer job <strong>keeps young people alive</strong>. The mortality effect, concentrated in deaths from violence and accidents, points to behavioral and social-network changes that outlast a single summer of employment.'
+  },
+  {
+    id: 'leos-urbel-2014',
+    location: 'New York City SYEP',
+    authors: 'Leos-Urbel',
+    year: 2014,
+    design: 'RCT',
+    city: 'NYC',
+    cityLabel: 'NYC',
+    effect: 0,
+    effectLabel: 'School engagement',
+    journal: 'Journal of Policy Analysis and Management',
+    url: 'https://onlinelibrary.wiley.com/doi/10.1002/pam.21780',
+    methodology: 'Used the NYC SYEP lottery as a natural experiment to estimate effects on school outcomes. Linked applicant records to NYC Department of Education attendance and exam data.',
+    findings: 'Modest school-engagement gains overall, with larger effects (5–7 additional days of attendance per year) concentrated among older youth and those with prior attendance below 95 percent. No effect on overall academic performance.',
+    insight: 'An early signal that SYEP’s benefits flow most strongly to <strong>higher-risk youth</strong> — a pattern later confirmed across crime, employment, and education outcomes in subsequent studies.'
+  },
+  {
+    id: 'modestino-paulsen-2019',
+    location: 'Boston SYEP',
+    authors: 'Modestino & Paulsen',
+    year: 2019,
+    design: 'Quasi-experimental',
+    city: 'Boston',
+    cityLabel: 'Boston',
+    effect: 0,
+    effectLabel: 'Soft-skill gains',
+    journal: 'Children and Youth Services Review',
+    url: 'https://doi.org/10.1016/j.childyouth.2019.06.030',
+    methodology: 'Combined administrative records with pre/post participant surveys to measure self-reported gains in social, emotional, and work-readiness skills among Boston SYEP participants.',
+    findings: 'Significant self-reported gains in conflict resolution, communication, asking for help, managing emotions, and job-readiness behaviors. About 20 percent of participants reported using earnings to help pay household bills.',
+    insight: 'Provides the <strong>mechanism evidence</strong> to go with the crime-reduction findings: SYEPs appear to build the social-emotional skills that help young people de-escalate conflict and make different choices in high-stakes moments.'
+  },
+  {
+    id: 'modestino-2019',
+    location: 'Boston SYEP (2015)',
+    authors: 'Modestino',
+    year: 2019,
+    design: 'RCT',
+    city: 'Boston',
+    cityLabel: 'Boston',
+    effect: 41,
+    effectLabel: '−41% violent arraignments',
+    journal: 'Labour Economics',
+    url: 'https://doi.org/10.1016/j.labeco.2019.04.009',
+    methodology: 'Randomized lottery for the 2015 Boston SYEP cohort. Linked applicant records to Massachusetts criminal-history (CORI) and Department of Corrections data to track arraignments over a 17-month follow-up.',
+    findings: 'SYEP participation reduced violent-crime arraignments by 3.6 per 100 youth — a 41 percent decline from the 8.7 per 100 baseline. Property-crime arraignments fell 37 percent (2.9 per 100 youth). Survey data linked these reductions to self-reported improvements in conflict-resolution and emotion-management skills.',
+    insight: 'Replicates Heller’s Chicago finding in a very different city, with a different program model and a different criminal-justice metric — <strong>arraignments rather than arrests</strong> — and finds equally large effects, strengthening the causal case.'
+  },
+  {
+    id: 'davis-heller-2020',
+    location: 'Chicago OSC+ (2012 + 2013 cohorts)',
+    authors: 'Davis & Heller',
+    year: 2020,
+    design: 'RCT',
+    city: 'Chicago',
+    cityLabel: 'Chicago',
+    effect: 56,
+    effectLabel: '−56–73% violent arrests',
+    journal: 'Journal of Policy Analysis and Management',
+    url: 'https://onlinelibrary.wiley.com/doi/10.1002/pam.22189',
+    methodology: 'Pooled randomized trials of the 2012 and 2013 One Summer Chicago Plus cohorts. Used Chicago Police Department arrest records to track participants for two years post-program. Examined heterogeneity by criminal-history risk and demographic subgroups.',
+    findings: 'Violent-crime arrests fell 56 percent in the 2012 cohort and 73 percent in the 2013 cohort in the year after random assignment. Effects concentrated in higher-risk subgroups. SYEP participation generated a large “summer earnings” effect (+$663 / +$799) but did not translate into post-program formal-sector employment gains.',
+    insight: 'A direct <strong>replication and extension</strong> of Heller (2014). Two independent cohorts produce arrest reductions even larger than the original — the rare case of a social-policy RCT replicating in the same direction with similar magnitude.'
+  },
+  {
+    id: 'kessler-2021',
+    location: 'New York City SYEP (2005–2008)',
+    authors: 'Kessler, Tahamont, Gelber & Isen',
+    year: 2021,
+    design: 'RCT',
+    city: 'NYC',
+    cityLabel: 'NYC',
+    effect: 31,
+    effectLabel: '−31% convictions',
+    journal: 'NBER WP / AER (R&R)',
+    url: 'https://www.nber.org/papers/w28373',
+    methodology: 'Used NYC SYEP’s 2005–2008 lottery linked to NYS Division of Criminal Justice Services records to estimate program effects on arrests, convictions, and case dispositions during and after the program summer.',
+    findings: 'During the program summer, the probability of any arrest fell 17 percent (felony arrests −23 percent). The probability of any conviction over the study window dropped 31 percent. Effects were concentrated among youth with prior arrest histories.',
+    insight: 'Pushes the NYC evidence further down the criminal-justice funnel: not just fewer arrests, but <strong>fewer convictions and case escalations</strong> — the outcomes that determine whether young people end up with a record that follows them for life.'
+  },
+  {
+    id: 'heller-kessler-2021',
+    location: 'NYC SYEP recommendation-letter add-on (2016–17)',
+    authors: 'Heller & Kessler',
+    year: 2021,
+    design: 'RCT',
+    city: 'NYC',
+    cityLabel: 'NYC',
+    effect: 0,
+    effectLabel: 'Employment +4.5%',
+    journal: 'NBER WP',
+    url: 'https://www.nber.org/papers/w29579',
+    methodology: 'Layered a randomized add-on onto NYC SYEP: a subset of 2016–17 participants received a recommendation letter generated from supervisor evaluations. Tracked subsequent employment using NYS unemployment-insurance earnings data.',
+    findings: 'Recommendation letters lifted post-program employment by 3.13 percentage points (4.5 percent) the following year and 1.95 points (2.3 percent) over two years. There was no increase in job-search behavior, suggesting employers — not applicants — changed behavior. A small offsetting effect on on-time graduation appeared among lower-GPA students.',
+    insight: 'Tests a <strong>low-cost design tweak</strong> on top of the core program. Confirms that one reason SYEP’s labor-market effects fade is informational — employers don’t learn about youth’s skills without a credible signal.'
+  },
+  {
+    id: 'schwartz-2021',
+    location: 'New York City SYEP',
+    authors: 'Schwartz, Leos-Urbel, McMurry & Wiswall',
+    year: 2021,
+    design: 'RCT',
+    city: 'NYC',
+    cityLabel: 'NYC',
+    effect: 0,
+    effectLabel: 'Attendance + Regents',
+    journal: 'Education Finance and Policy',
+    url: 'https://doi.org/10.1162/edfp_a_00310',
+    methodology: 'Combined NYC SYEP lottery records with NYC Department of Education data to estimate effects on school attendance, exam attempts, and graduation. Examined effects of repeated participation across multiple summers.',
+    findings: 'Modest gains in attendance and Regents-exam attempts/passes among older participants and those with prior absences above 5 percent of school days. Effects grew larger with repeated SYEP participation, suggesting cumulative benefit from multi-summer enrollment.',
+    insight: '<strong>Repeated participation matters.</strong> Single-summer effects on schooling are small, but stacking summers compounds the gains — a finding policymakers can act on by giving priority to returning applicants for high-need youth.'
+  },
+  {
+    id: 'heller-2022',
+    location: 'Chicago + Philadelphia (OSC+ 2015 + WorkReady 2017–18)',
+    authors: 'Heller',
+    year: 2022,
+    design: 'RCT',
+    city: 'Multi',
+    cityLabel: 'Chicago + Philly',
+    effect: 100,
+    effectLabel: '−107% Phila. arrests',
+    journal: 'NBER WP',
+    url: 'https://www.nber.org/papers/w28282',
+    methodology: 'Two new RCTs: One Summer Chicago Plus 2015 and Philadelphia WorkReady 2017–18. Built a risk index from baseline records to test whether SYEP effects scale with predicted criminal-justice involvement absent the program. Pooled with prior trials for a meta-analytic test of risk-targeting.',
+    findings: 'In Philadelphia, total arrests fell by roughly 3 per 100 youth — a 107 percent reduction from baseline — and the probability of juvenile incarceration dropped 1.5 percentage points (107 percent reduction). In Chicago 2015, drug arrests fell 135 percent and other non-violent arrests 75 percent, with continued declines into year three. Across all four cities, effects scaled <em>linearly</em> with baseline risk.',
+    insight: 'The <strong>targeting paper.</strong> Demonstrates that SYEP impacts grow proportionally with the risk a young person would otherwise face — making the case that scarce slots should be allocated to youth with the most baseline risk, not the most polished applications.'
+  },
+  {
+    id: 'modestino-paulsen-2022',
+    location: 'Boston SYEP (2015)',
+    authors: 'Modestino & Paulsen',
+    year: 2022,
+    design: 'RCT',
+    city: 'Boston',
+    cityLabel: 'Boston',
+    effect: 0,
+    effectLabel: 'Education + crime',
+    journal: 'Journal of Public Economics',
+    url: 'https://doi.org/10.1016/j.jpubeco.2022.104727',
+    methodology: 'Extended the 2015 Boston SYEP RCT to include education-administrative-data outcomes. Examined attendance, GPA, on-time graduation, and dropout, alongside the criminal-justice findings from Modestino (2019).',
+    findings: 'Boston SYEP participants showed significant gains in attendance (+0.8 days), on-time graduation (+5 percentage points), and overall GPA, with no increase in dropout. Effects were concentrated in chronically absent youth and youth of legal dropout age. The educational gains appeared to fade without a second summer of participation.',
+    insight: 'The <strong>strongest education evidence</strong> in the SYEP literature — and a reminder that crime and schooling effects can both flow from the same intervention. The fade-out without a second summer reinforces Schwartz et al.’s repeat-participation finding.'
+  },
+  {
+    id: 'valentine-2017',
+    location: 'NYC SYEP nine-year follow-up',
+    authors: 'Valentine, Anderson, Hossain & Unlu (MDRC)',
+    year: 2017,
+    design: 'RCT',
+    city: 'NYC',
+    cityLabel: 'NYC',
+    effect: 0,
+    effectLabel: 'Long-run fade',
+    journal: 'MDRC',
+    url: 'https://www.mdrc.org/publication/effects-new-york-city-s-summer-youth-employment-program',
+    methodology: 'Long-run follow-up of the 2006 NYC SYEP cohort, using nine years of post-program administrative data on earnings, employment, and criminal justice involvement.',
+    findings: 'Short-run summer earnings gains did not persist; nine-year cumulative earnings showed no statistically significant difference. Criminal-justice gains for higher-risk subgroups were more durable than employment gains, mirroring patterns in the Chicago and Boston work.',
+    insight: '<strong>Don’t oversell long-run earnings.</strong> SYEPs are a strong crime-prevention and immediate-income tool, but a single summer is not, on its own, a workforce-development panacea — design tweaks like recommendation letters help close that gap.'
+  },
+  {
+    id: 'jpal-2022',
+    location: 'J-PAL evidence review (13 RCTs)',
+    authors: 'Li & Jackson-Spieker (J-PAL North America)',
+    year: 2022,
+    design: 'Non-experimental',
+    city: 'Multi',
+    cityLabel: 'Multi-city',
+    effect: 0,
+    effectLabel: 'Synthesis',
+    journal: 'J-PAL Evidence Review',
+    url: 'https://www.povertyactionlab.org/sites/default/files/research-paper/SYEP_Evidence_Review-9.22.22.pdf',
+    methodology: 'Narrative synthesis of 13 randomized evaluations of summer youth employment programs in Boston, Chicago, NYC, and Philadelphia. Reconciled comparison-group definitions across studies (translating LATEs to a common control-group baseline) so percentage-change estimates are comparable.',
+    findings: 'Across all four cities, SYEPs consistently boost summer employment and earnings and consistently reduce arrests, arraignments, convictions, and incarceration — effects that persist at least one year past the program. Effects on post-program employment, earnings, and education are mixed on average but reliably positive for higher-risk subgroups.',
+    insight: 'The <strong>canonical synthesis</strong>. Treats the question “do summer jobs reduce crime?” as settled across multiple cities and program models, while clarifying which other outcomes are more conditional on program design and participant population.'
+  },
+  {
+    id: 'dc-2016',
+    location: 'DC Auditor 8-city + DC SYEP review',
+    authors: 'Juffras & Patterson (DC Auditor)',
+    year: 2016,
+    design: 'Non-experimental',
+    city: 'Multi',
+    cityLabel: 'Multi-city',
+    effect: 0,
+    effectLabel: 'Cross-city compare',
+    journal: 'Office of the DC Auditor',
+    url: 'https://dcauditor.org/wp-content/uploads/2016/12/SYEP_FullReport_Final_12.22.16.pdf',
+    methodology: 'Cross-sectional review of summer youth employment programs in eight major U.S. cities plus DC, comparing eligibility rules, funding levels, slot counts, supervision practices, and reported outcomes.',
+    findings: 'Documented wide variation in program scale (under 2,000 slots in some cities, over 70,000 in NYC), per-participant cost ($1,800–$3,000), and supervision intensity. Found best-evidence outcomes — including crime reductions — in programs with more selective targeting and stronger adult supervision.',
+    insight: 'Useful <strong>design-and-scale context</strong> for the experimental literature: tells you what policymakers actually run, what it costs, and which design features correlate with stronger outcomes when comparing across cities rather than within an RCT.'
+  }
+];
+
+// ═══ STATE ═══
+const activeFilters = { city: 'all', design: 'all' };
+let currentSort = 'year-desc';
+let expandedId = null;
+
+const tbody = document.getElementById('studyBody');
+const noResults = document.getElementById('noResults');
+const resultCount = document.getElementById('resultCount');
+
+function getDesignTag(d) {
+  const map = {
+    'RCT': 'tag-rct',
+    'Quasi-experimental': 'tag-quasi',
+    'Natural experiment': 'tag-natural',
+    'Non-experimental': 'tag-nonexp',
+    'Meta-analysis': 'tag-meta'
+  };
+  return `<span class="tag ${map[d] || 'tag-nonexp'}">${d}</span>`;
+}
+
+function getEffectColor(e) {
+  if (e === 0) return 'var(--vc-charcoal)';
+  if (e >= 50) return 'var(--vc-magenta)';
+  if (e >= 25) return 'var(--vc-orange)';
+  return 'var(--vc-cerulean)';
+}
+
+function getBarWidth(effect) {
+  if (effect === 0) return 0;
+  // SYEP effects range up to ~107%; scale 0-100% effect = 0-100% bar.
+  return Math.min(Math.max(effect, 8), 100);
+}
+
+function filterStudies() {
+  return STUDIES.filter(s => {
+    if (activeFilters.city !== 'all' && s.city !== activeFilters.city) return false;
+    if (activeFilters.design !== 'all' && s.design !== activeFilters.design) return false;
+    return true;
+  });
+}
+
+function sortStudies(studies) {
+  const sorted = [...studies];
+  switch (currentSort) {
+    case 'year-desc': sorted.sort((a, b) => b.year - a.year); break;
+    case 'year-asc': sorted.sort((a, b) => a.year - b.year); break;
+    case 'effect-desc': sorted.sort((a, b) => b.effect - a.effect); break;
+    case 'effect-asc': sorted.sort((a, b) => a.effect - b.effect); break;
+  }
+  return sorted;
+}
+
+function renderDetail(s) {
+  return `<tr class="detail-row" data-detail="${s.id}">
+    <td colspan="5">
+      <div class="detail-content">
+        <div class="detail-block">
+          <h4>Methodology</h4>
+          <p>${s.methodology}</p>
+        </div>
+        <div class="detail-block">
+          <h4>Key findings</h4>
+          <p>${s.findings}</p>
+          ${s.url ? `<a href="${s.url}" target="_blank" rel="noopener" class="detail-link">Read the study</a>` : ''}
+        </div>
+        <div class="detail-insight">${s.insight}</div>
+      </div>
+    </td>
+  </tr>`;
+}
+
+function render() {
+  const filtered = sortStudies(filterStudies());
+  resultCount.textContent = `${filtered.length} ${filtered.length === 1 ? 'study' : 'studies'}`;
+
+  if (filtered.length === 0) {
+    tbody.innerHTML = '';
+    noResults.style.display = '';
+    return;
+  }
+  noResults.style.display = 'none';
+
+  let html = '';
+  for (const s of filtered) {
+    const isExpanded = expandedId === s.id;
+    const barW = getBarWidth(s.effect);
+    const color = getEffectColor(s.effect);
+
+    html += `<tr data-id="${s.id}" class="${isExpanded ? 'expanded' : ''}">
+      <td>
+        <div class="study-location">${s.location}</div>
+        <div class="study-authors">${s.authors}</div>
+      </td>
+      <td>${s.year}</td>
+      <td>${getDesignTag(s.design)}</td>
+      <td><span class="tag-city">${s.cityLabel}</span></td>
+      <td class="effect-cell">
+        <div class="effect-bar-wrap">
+          <div class="effect-bar-track">
+            <div class="effect-bar-fill" style="background: ${color}; --bar-w: ${barW}%;"></div>
+          </div>
+          <div class="effect-bar-label" style="color: ${color};">${s.effectLabel}</div>
+        </div>
+      </td>
+    </tr>`;
+
+    if (isExpanded) {
+      html += renderDetail(s);
+    }
+  }
+  tbody.innerHTML = html;
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      tbody.querySelectorAll('.effect-bar-fill').forEach(el => el.classList.add('animate'));
+    });
+  });
+
+  tbody.querySelectorAll('tr[data-id]').forEach(row => {
+    row.addEventListener('click', () => {
+      const id = row.dataset.id;
+      expandedId = expandedId === id ? null : id;
+      render();
+    });
+  });
+}
+
+// ═══ FILTER BUTTONS ═══
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const filter = btn.dataset.filter;
+    const value = btn.dataset.value;
+
+    if (value !== 'all' && activeFilters[filter] === value) {
+      activeFilters[filter] = 'all';
+      const group = btn.closest('.filter-group');
+      group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      group.querySelector('[data-value="all"]').classList.add('active');
+    } else {
+      activeFilters[filter] = value;
+      btn.closest('.filter-group').querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    expandedId = null;
+    render();
+  });
+});
+
+document.getElementById('sortSelect').addEventListener('change', e => {
+  currentSort = e.target.value;
+  expandedId = null;
+  render();
+});
+
+render();
+</script>
+</body>
+</html>
