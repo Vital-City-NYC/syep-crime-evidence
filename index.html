@@ -386,7 +386,7 @@
 <div class="summary-strip">
   <div class="summary-inner">
     <div class="summary-stat">
-      <div class="summary-stat-value">14</div>
+      <div class="summary-stat-value">22</div>
       <div class="summary-stat-label">Studies profiled</div>
     </div>
     <div class="summary-stat">
@@ -663,6 +663,134 @@ const STUDIES = [
     methodology: 'Narrative synthesis of 13 randomized evaluations of summer youth employment programs in Boston, Chicago, NYC, and Philadelphia. Reconciled comparison-group definitions across studies (translating LATEs to a common control-group baseline) so percentage-change estimates are comparable.',
     findings: 'Across all four cities, SYEPs consistently boost summer employment and earnings and consistently reduce arrests, arraignments, convictions, and incarceration — effects that persist at least one year past the program. Effects on post-program employment, earnings, and education are mixed on average but reliably positive for higher-risk subgroups.',
     insight: 'The <strong>canonical synthesis</strong>. Treats the question “do summer jobs reduce crime?” as settled across multiple cities and program models, while clarifying which other outcomes are more conditional on program design and participant population.'
+  },
+  {
+    id: 'heller-bam-2017',
+    location: 'Chicago BAM + summer jobs (Becoming a Man)',
+    authors: 'Heller, Shah, Guryan, Ludwig, Mullainathan & Pollack',
+    year: 2017,
+    design: 'RCT',
+    city: 'Chicago',
+    cityLabel: 'Chicago',
+    effect: 50,
+    effectLabel: '−50% violent arrests',
+    journal: 'Quarterly Journal of Economics',
+    url: 'https://academic.oup.com/qje/article/132/1/1/2724542',
+    methodology: 'Two RCTs of Becoming a Man (BAM) — a school-year cognitive-behavioral therapy program for at-risk Chicago boys — bundled in one study with an evaluation of the JOY summer jobs program. Roughly 5,000 disadvantaged 7th–10th graders were randomized to BAM, BAM + summer jobs, or control. Outcomes tracked through Chicago Police arrest records and Chicago Public Schools data.',
+    findings: 'BAM cut violent-crime arrests by about 50 percent and raised school engagement during the program. The bundled summer-jobs arm produced effects similar in direction to standalone Chicago SYEP trials. Cost-benefit returns were estimated at roughly 5–30× program cost.',
+    insight: 'Adjacent rather than strictly SYEP, but the <strong>closest cousin in the literature</strong>. Suggests that short, cheap interventions targeting decision-making in high-stakes moments — whether through CBT, summer jobs, or both — can produce outsized crime reductions for high-risk boys. <em>Limitation: BAM is the headline intervention here; the summer-jobs arm is a secondary test.</em>'
+  },
+  {
+    id: 'sum-2014',
+    location: 'National youth-employment decline',
+    authors: 'Sum, Khatiwada, Trubskyy, Ross, McHugh & Palma',
+    year: 2014,
+    design: 'Non-experimental',
+    city: 'Multi',
+    cityLabel: 'National',
+    effect: 0,
+    effectLabel: 'Context',
+    journal: 'Brookings Institution',
+    url: 'https://www.brookings.edu/wp-content/uploads/2014/03/Youth_Workforce_Report_FINAL-1.pdf',
+    methodology: 'Descriptive analysis of Current Population Survey data on teen and young-adult employment rates 2000–2013, with breakouts by race, household income, and metro area.',
+    findings: 'Teen employment fell from 45 percent in 2000 to roughly 26 percent in 2011, with much steeper declines for Black and Hispanic teens from low-income households. Documents the “plummeting labor-market fortunes” of low-income youth that motivated the modern wave of SYEP investment.',
+    insight: 'Provides the <strong>motivational context</strong> for why cities run SYEPs in the first place. <em>Limitation: descriptive only — establishes the problem, not the program effect.</em>'
+  },
+  {
+    id: 'ross-kazis-2016',
+    location: 'Youth summer jobs program design review',
+    authors: 'Ross & Kazis',
+    year: 2016,
+    design: 'Non-experimental',
+    city: 'Multi',
+    cityLabel: 'National',
+    effect: 0,
+    effectLabel: 'Design review',
+    journal: 'Brookings Institution',
+    url: 'https://www.brookings.edu/wp-content/uploads/2016/07/Summer-Jobs-Ross-7-12-16.pdf',
+    methodology: 'Implementation review of large-city SYEPs: program goals, eligibility rules, employer mix, supervision practices, and tradeoffs between scale and intensity. Synthesizes program documentation, interviews, and the existing experimental literature.',
+    findings: 'Argues SYEPs are pulled in two directions — broad workforce-development goals (favoring scale, lighter touch) versus crime/youth-development goals (favoring tighter targeting and richer programming). Cities that try to do both at full scale typically dilute both.',
+    insight: 'Useful <strong>design framework</strong> for reading the experimental results: program tradeoffs explain why effects vary across cities even when the basic intervention looks similar. <em>Limitation: synthesis and interviews, not new causal evidence.</em>'
+  },
+  {
+    id: 'mdrc-2018',
+    location: 'NYC SYEP cost-benefit follow-up',
+    authors: 'MDRC (Anderson et al.)',
+    year: 2018,
+    design: 'Non-experimental',
+    city: 'NYC',
+    cityLabel: 'NYC',
+    effect: 0,
+    effectLabel: 'Cost-benefit',
+    journal: 'MDRC brief',
+    url: 'https://www.mdrc.org/publication/effects-new-york-city-s-summer-youth-employment-program',
+    methodology: 'Companion cost-benefit and program-implementation briefs to the Valentine et al. nine-year RCT follow-up of NYC SYEP. Translates the experimental impact estimates into per-participant cost figures and benefit-to-cost ratios.',
+    findings: 'Per-participant program cost in the studied cohorts was roughly $2,200; mortality and incarceration impacts alone yield benefit-to-cost ratios estimated above 1, even before counting summer earnings transferred to participants and their households.',
+    insight: 'Translates the published RCT estimates into the <strong>language city budget offices actually use</strong>. <em>Limitation: synthesizes existing experimental estimates rather than producing new causal evidence; sensitive to assumptions about the dollar value of avoided crime and mortality.</em>'
+  },
+  {
+    id: 'wilson-2018',
+    location: 'Employment programs & crime — systematic review',
+    authors: 'Wilson, Brennan & Olaghere',
+    year: 2018,
+    design: 'Quasi-experimental',
+    city: 'Multi',
+    cityLabel: 'International',
+    effect: 0,
+    effectLabel: 'Mixed pooled',
+    journal: 'Campbell Systematic Reviews',
+    url: 'https://onlinelibrary.wiley.com/doi/10.4073/csr.2018.6',
+    methodology: 'Campbell Collaboration systematic review and meta-analysis of formal-employment-focused interventions for adult and youth offenders. Pooled effect sizes across studies meeting strict inclusion criteria, primarily quasi-experimental.',
+    findings: 'Across employment-program evaluations broadly, average effects on recidivism were small and inconsistent. The review pre-dates much of the recent SYEP RCT evidence and is dominated by adult re-entry programs rather than primary-prevention summer jobs.',
+    insight: 'A useful <strong>cautionary frame</strong>: not every “jobs reduce crime” claim survives meta-analytic scrutiny. SYEPs’ track record looks distinctively strong against this broader employment-and-crime backdrop. <em>Limitation: focused mostly on adult re-entry programs, not primary-prevention SYEPs; predates several major SYEP RCTs.</em>'
+  },
+  {
+    id: 'osc-annualreport-2014',
+    location: 'One Summer Chicago annual report',
+    authors: 'One Summer Chicago program office',
+    year: 2014,
+    design: 'Non-experimental',
+    city: 'Chicago',
+    cityLabel: 'Chicago',
+    effect: 0,
+    effectLabel: 'Self-report',
+    journal: 'OSC program report',
+    url: 'http://mhalabs.org/wp-content/uploads/2014/04/OneSummerChicago_AnnualReport_2014.pdf',
+    methodology: 'Program-office self-evaluation of One Summer Chicago: participant counts, employer mix, exit-survey responses on earnings, financial behavior, and self-reported skill gains. No control group.',
+    findings: 'Participants reported using ~80 percent of net wages on family expenses or local businesses, and the bulk reported gains in work-readiness and confidence. Documents the rapid scaling of the OSC+ subset that anchors the Heller and Davis & Heller RCTs.',
+    insight: 'Useful <strong>operational context</strong> for the Chicago experimental record — who actually shows up, what they do with the money, how the program scaled. <em>Limitation: program self-report with no control group; not a causal estimate.</em>'
+  },
+  {
+    id: 'modestino-2024',
+    location: 'Boston SYEP — extended outcomes',
+    authors: 'Modestino, Paulsen & co-authors (working papers)',
+    year: 2024,
+    design: 'RCT',
+    city: 'Boston',
+    cityLabel: 'Boston',
+    effect: 0,
+    effectLabel: 'Mechanism / wages',
+    journal: 'Working papers',
+    url: 'https://alicia-modestino.com/research',
+    methodology: 'Newer working-paper extensions of the 2015 Boston SYEP RCT — additional follow-up years on wages, employer mix, and behavioral mechanisms; subgroup re-analyses by gender, race, and prior justice involvement.',
+    findings: 'Continues to find concentrated benefits for chronically absent youth and youth at higher baseline risk. New analyses reinforce that effects on wages and education fade without repeated participation, while criminal-justice impacts persist.',
+    insight: 'Confirms the <strong>“targeting and dosage” story</strong> emerging across the literature — short bursts move crime, repeat doses move schooling and wages. <em>Limitation: mostly working-paper status; specific point estimates may shift in peer review.</em>'
+  },
+  {
+    id: 'dc-syep-evals',
+    location: 'DC SYEP — quasi-experimental evaluations',
+    authors: 'DC Auditor sub-reports; Hyman et al.',
+    year: 2017,
+    design: 'Quasi-experimental',
+    city: 'Multi',
+    cityLabel: 'Washington, DC',
+    effect: 0,
+    effectLabel: 'Suggestive',
+    journal: 'Office of the DC Auditor / working papers',
+    url: 'https://dcauditor.org/wp-content/uploads/2016/12/SYEP_FullReport_Final_12.22.16.pdf',
+    methodology: 'Quasi-experimental and matching-style evaluations of DC’s Marion Barry Summer Youth Employment Program (MBSYEP) using administrative records on participants and matched comparison youth.',
+    findings: 'Suggestive reductions in some criminal-justice measures and modest school-engagement gains, but smaller and less robust than the experimental estimates from Boston, Chicago, NYC, and Philadelphia. Effects vary across program years and methodological choices.',
+    insight: 'Adds a <strong>fifth city to the picture</strong>, with directionally consistent but methodologically weaker results. <em>Limitation: no lottery; effects sensitive to matching specification and may pick up selection into the program.</em>'
   },
   {
     id: 'dc-2016',
