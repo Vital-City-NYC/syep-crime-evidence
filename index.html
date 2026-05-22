@@ -26,31 +26,41 @@
     --vc-cerulean-80: #4e98cb;
     --font-primary: 'Helvetica Neue', Arial, sans-serif;
     --font-serif: Georgia, 'Times New Roman', serif;
+    --vc-paper: #f7f7f4;
+    --panel-border: rgba(5,5,7,0.12);
+    --hair: rgba(5,5,7,0.09);
+    --text-primary: rgba(5,5,7,0.92);
+    --text-secondary: rgba(5,5,7,0.55);
+    --text-dim: rgba(5,5,7,0.38);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
     font-family: var(--font-primary);
-    background: var(--vc-white);
-    color: var(--vc-black);
+    background: var(--vc-paper);
+    color: var(--text-primary);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
 
   /* HEADER */
   .header {
-    background: var(--vc-black);
-    color: var(--vc-white);
+    background: var(--vc-white);
+    color: var(--text-primary);
     padding: 48px 32px 56px;
+    border-top: 3px solid var(--vc-chartreuse);
   }
   .header-inner { max-width: 960px; margin: 0 auto; }
   .header-label {
+    display: inline-block;
     font-size: 10px;
-    letter-spacing: 4px;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--vc-chartreuse);
-    font-weight: 700;
+    background: var(--vc-chartreuse);
+    color: var(--vc-black);
+    font-weight: 900;
+    padding: 4px 9px;
     margin-bottom: 16px;
   }
   .header h1 {
@@ -62,7 +72,7 @@
   }
   .header-dek {
     font-family: var(--font-serif);
-    color: var(--vc-periwinkle);
+    color: var(--text-secondary);
     font-size: 17px;
     line-height: 1.6;
     max-width: 640px;
@@ -71,8 +81,8 @@
 
   /* SUMMARY STRIP */
   .summary-strip {
-    background: var(--vc-black);
-    border-top: 1px solid rgba(255,255,255,0.08);
+    background: var(--vc-white);
+    border-top: 1px solid var(--panel-border);
     padding: 0 32px 48px;
   }
   .summary-inner {
@@ -85,18 +95,18 @@
   .summary-stat {
     text-align: center;
     padding: 24px 12px;
-    border: 1px solid rgba(255,255,255,0.06);
+    border: 1px solid var(--panel-border);
   }
   .summary-stat-value {
     font-size: 36px;
     font-weight: 900;
-    color: var(--vc-chartreuse);
+    color: var(--text-primary);
     line-height: 1;
     margin-bottom: 6px;
   }
   .summary-stat-label {
     font-size: 11px;
-    color: var(--vc-periwinkle);
+    color: var(--text-dim);
     letter-spacing: 0.5px;
     text-transform: uppercase;
     font-weight: 700;
@@ -317,13 +327,18 @@
 
   .detail-insight {
     grid-column: 1 / -1;
-    background: var(--vc-black);
-    color: var(--vc-white);
+    background: var(--vc-paper);
+    color: var(--text-primary);
+    border-left: 3px solid var(--vc-chartreuse);
     padding: 16px 20px;
     font-size: 13px;
     line-height: 1.55;
   }
-  .detail-insight strong { color: var(--vc-chartreuse); }
+  .detail-insight strong {
+    color: var(--vc-black);
+    font-weight: 800;
+    background: linear-gradient(transparent 62%, var(--vc-chartreuse) 62%);
+  }
 
   /* FOOTER */
   .footer {
